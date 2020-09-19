@@ -1,24 +1,45 @@
-# README
+## datas_tagsテーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|Column|Type|Options|
+|------|----|-------|
+|tag_id|integer|null: false, foreign_key: true|
+|rawdata_id|integer|null: false, foreign_key: true|
 
-Things you may want to cover:
+### Association
+- belongs_to :rawdata
+- belongs_to :user
 
-* Ruby version
+## tagsテーブル
 
-* System dependencies
+|Column|Type|Options|
+|------|----|-------|
+|text|text|null: false|
 
-* Configuration
+### Association
+- has_many :datas_tags
+- has_many :rawdata, through: :datas_tags
 
-* Database creation
+## usersテーブル
 
-* Database initialization
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false, index: true|
+|email|string|null: false|
+|password|string|null: false|
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
+- has_many :Rawdatas
 
-* Deployment instructions
+## Rawdatasテーブル
 
-* ...
+|Column|Type|Options|
+|------|----|-------|
+|user_id|integer|null: false, foreign_key: true|
+|title|text|null: false|
+|image|text|null: false|
+
+### Association
+- belongs_to :user
+- has_many :datas_tags
+- has_many  :tags,  through:  :datas_tags
